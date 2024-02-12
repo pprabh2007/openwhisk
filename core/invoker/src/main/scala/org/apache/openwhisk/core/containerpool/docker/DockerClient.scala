@@ -135,6 +135,10 @@ class DockerClient(dockerHost: Option[String] = None,
       }
     }.flatMap { _ =>
       // Iff the semaphore was acquired successfully
+      println("\n\n\n\n\nMELLLOOOOO\n\n\n\n\n")
+      val command = Seq("run", "-d") ++ args ++ Seq(image)
+      command.foreach(println)
+
       runCmd(
         Seq("run", "-d") ++ args ++ Seq(image),
         config.timeouts.run,
