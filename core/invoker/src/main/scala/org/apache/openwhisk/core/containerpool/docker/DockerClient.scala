@@ -135,10 +135,6 @@ class DockerClient(dockerHost: Option[String] = None,
       }
     }.flatMap { _ =>
       // Iff the semaphore was acquired successfully
-      println("\n\n\n\n\nMELLLOOOOO\n\n\n\n\n")
-      val command = Seq("run", "-d") ++ args ++ Seq(image)
-      command.foreach(println)
-
       runCmd(
         Seq("run", "-d") ++ args ++ Seq(image),
         config.timeouts.run,
@@ -215,6 +211,8 @@ class DockerClient(dockerHost: Option[String] = None,
       LoggingMarkers.INVOKER_DOCKER_CMD(args.head),
       s"running ${maskedArgs.map(maskedArgs => (dockerCmd ++ maskedArgs).mkString(" ")).getOrElse(cmd.mkString(" "))} (timeout: $timeout)",
       logLevel = InfoLevel)
+    println("\n\n\n\nMELLLLLOOOOO\n\n\n\n")
+    println(cmd)
     executeProcess(cmd, timeout).andThen {
       case Success(_) => transid.finished(this, start)
       case Failure(pte: ProcessTimeoutException) =>
