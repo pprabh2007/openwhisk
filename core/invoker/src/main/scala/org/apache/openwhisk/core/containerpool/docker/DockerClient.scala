@@ -206,13 +206,14 @@ class DockerClient(dockerHost: Option[String] = None,
   protected def runCmd(args: Seq[String], timeout: Duration, maskedArgs: Option[Seq[String]] = None)(
     implicit transid: TransactionId): Future[String] = {
     val cmd = dockerCmd ++ args
+    println("\n\n\n\nHELLOOOOO")
+    args.foreach(println)
+    println("\n\n\n\nMELLLOOOO")
     val start = transid.started(
       this,
       LoggingMarkers.INVOKER_DOCKER_CMD(args.head),
       s"running ${maskedArgs.map(maskedArgs => (dockerCmd ++ maskedArgs).mkString(" ")).getOrElse(cmd.mkString(" "))} (timeout: $timeout)",
       logLevel = InfoLevel)
-    println("\n\n\n\nMELLLLLOOOOO\n\n\n\n")
-    cmd.foreach(println)
     executeProcess(cmd, timeout).andThen {
       case Success(_) => transid.finished(this, start)
       case Failure(pte: ProcessTimeoutException) =>
