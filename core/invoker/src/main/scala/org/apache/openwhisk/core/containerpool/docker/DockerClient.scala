@@ -212,7 +212,7 @@ class DockerClient(dockerHost: Option[String] = None,
       s"running ${maskedArgs.map(maskedArgs => (dockerCmd ++ maskedArgs).mkString(" ")).getOrElse(cmd.mkString(" "))} (timeout: $timeout)",
       logLevel = InfoLevel)
     println("\n\n\n\nMELLLLLOOOOO\n\n\n\n")
-    println(cmd)
+    cmd.foreach(println)
     executeProcess(cmd, timeout).andThen {
       case Success(_) => transid.finished(this, start)
       case Failure(pte: ProcessTimeoutException) =>
