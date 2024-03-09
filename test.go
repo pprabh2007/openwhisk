@@ -12,17 +12,17 @@ import (
 
 func Main(obj map[string]interface{}) map[string]interface{} {
 	// do your work
-	name, _ := obj["name"].(string)
-	msg := make(map[string]interface{})
-	msg["message"] = "Hello, " + name + "!"
+	name, ok := obj["name"].(string)
+	if !ok {
+		name = "pss2161"
+	}
+	fmt.Printf("%v\n", name); //to test
 
 	seed := 42               // default seed value
 	ARRAY_SIZE := 10000      // default array size value
 	REQ_NUM := math.MaxInt32 // default request number
 	
-	fmt.Printf("%v\n", mainLogic(seed, ARRAY_SIZE, REQ_NUM))
-
-	return msg
+	return mainLogic(seed, ARRAY_SIZE, REQ_NUM)
   }  
 
 func mainLogic(seed int, ARRAY_SIZE int, REQ_NUM int) (map[string]interface{}) {
