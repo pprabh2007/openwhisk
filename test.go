@@ -12,17 +12,34 @@ import (
 
 func Main(obj map[string]interface{}) map[string]interface{} {
 	// do your work
-	name, ok := obj["name"].(string)
-	if !ok {
-		name = "pss2161"
-	}
-	fmt.Printf("%v\n", name); //to test
-
-	seed := 42               // default seed value
-	ARRAY_SIZE := 10000      // default array size value
-	REQ_NUM := math.MaxInt32 // default request number
+	var seed int
+	var arr_size int
+	var req_num int
 	
-	return mainLogic(seed, ARRAY_SIZE, REQ_NUM)
+	seed_float, ok_seed := obj["seed"].(float64)
+	if !ok_seed {
+		seed = 42
+	} else {
+		seed = int(seed_float)
+	}
+
+	arr_size_float, ok_arr_size := obj["arr_size"].(float64)
+	if !ok_arr_size {
+		arr_size = 10000
+	} else {
+		arr_size = int(arr_size_float)
+	}
+	
+	req_num_float, ok_req_num := obj["req_num"].(float64)
+	if !ok_req_num {
+		req_num = math.MaxInt32
+	} else {
+		req_num = int(req_num_float)
+	}
+
+	fmt.Printf("%v %v %v\n", seed, arr_size, req_num); //to test
+
+	return mainLogic(seed, arr_size, req_num)
   }  
 
 func mainLogic(seed int, ARRAY_SIZE int, REQ_NUM int) (map[string]interface{}) {
