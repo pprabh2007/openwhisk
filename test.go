@@ -7,6 +7,7 @@ import (
 	"os"
 	"runtime"
 	"time"
+	"strconv"
 	"fmt"
 )
 
@@ -15,26 +16,28 @@ func Main(obj map[string]interface{}) map[string]interface{} {
 	var seed int
 	var arr_size int
 	var req_num int
-	
-	seed_float, ok_seed := obj["seed"].(float64)
+
+	fmt.Printf("%v\n", obj);
+	fmt.Printf("%v %t\n", obj["arr_size"], obj["arr_size"]);
+	seed_str, ok_seed := obj["seed"].(string)
 	if !ok_seed {
 		seed = 42
 	} else {
-		seed = int(seed_float)
+		seed, _ = strconv.Atoi(seed_str)
 	}
 
-	arr_size_float, ok_arr_size := obj["arr_size"].(float64)
+	arr_size_str, ok_arr_size := obj["arr_size"].(string)
 	if !ok_arr_size {
 		arr_size = 10000
 	} else {
-		arr_size = int(arr_size_float)
+		arr_size, _ = strconv.Atoi(arr_size_str)
 	}
 	
-	req_num_float, ok_req_num := obj["req_num"].(float64)
+	req_num_str, ok_req_num := obj["req_num"].(string)
 	if !ok_req_num {
 		req_num = math.MaxInt32
 	} else {
-		req_num = int(req_num_float)
+		req_num, _ = strconv.Atoi(req_num_str)
 	}
 
 	fmt.Printf("%v %v %v\n", seed, arr_size, req_num); //to test
