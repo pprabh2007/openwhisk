@@ -42,11 +42,6 @@ case class ContainerArgsConfig(network: String,
         case _                 => None
       }
     }.toMap
-    
-    println("\n\n\n\n\nHELLOOOOOOOO\n\n\n\n")
-    extraEnvVarMap.foreach { case (key, value) =>
-      println(s"$key -> $value")
-}
 }
 
 case class ContainerPoolConfig(userMemory: ByteSize,

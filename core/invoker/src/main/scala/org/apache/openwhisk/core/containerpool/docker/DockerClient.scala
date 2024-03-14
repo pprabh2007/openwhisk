@@ -206,9 +206,6 @@ class DockerClient(dockerHost: Option[String] = None,
   protected def runCmd(args: Seq[String], timeout: Duration, maskedArgs: Option[Seq[String]] = None)(
     implicit transid: TransactionId): Future[String] = {
     val cmd = dockerCmd ++ args
-    println("\n\n\n\nHELLOOOOO")
-    args.foreach(println)
-    println("\n\n\n\nMELLLOOOO")
     val start = transid.started(
       this,
       LoggingMarkers.INVOKER_DOCKER_CMD(args.head),
